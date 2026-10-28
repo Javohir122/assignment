@@ -1,18 +1,15 @@
 def replace_value(values, index, new_value):
     values[index] = new_value
     return None
-
-
+    
 def find_first(values, target):
     for index in range(len(values)):
         if values[index] == target:
             return index
     return -1
-
-
+    
 def summarize(values):
     return min(values), max(values), sum(values)
-
 
 if __name__ == "__main__":
     days = int(input("Enter the number of days: "))
