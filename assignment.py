@@ -1,37 +1,45 @@
-def classify(value):
-    if value < 248:
-        return "Below range"
-    elif value <= 252:
-        return "In range"
+def replace_value(values, index, new_value):
+    values[index] = new_value
+    return None
+
+
+def find_first(values, target):
+    for index in range(len(values)):
+        if values[index] == target:
+            return index
+    return -1
+
+
+def summarize(values):
+    return min(values), max(values), sum(values)
+
+
+if __name__ == "__main__":
+    days = int(input("Enter the number of days: "))
+    original = []
+    for day in range(days):
+        emails = int(input("Enter the number of emails received: "))
+        original.append(emails)
+
+    updated = original[:]
+    index = int(input("Enter the index to correct: "))
+    new_value = int(input("Enter the new number of emails: "))
+    replace_value(updated, index, new_value)
+
+    target = int(input("Enter the number of emails to search for: "))
+    first_index = find_first(updated, target)
+    matching_count = updated.count(target)
+    minimum, maximum, total = summarize(updated)
+    sorted_values = sorted(updated)
+
+    print(f"Original: {original}")
+    print(f"Updated: {updated}")
+    print(f"Sorted: {sorted_values}")
+    print(f"Minimum number of emails: {minimum}")
+    print(f"Maximum number of emails: {maximum}")
+    print(f"Total number of emails: {total}")
+    if first_index == -1:
+        print(f"Target not found")
     else:
-        return "Above range"
-
-def calculate_average(total, count):
-    return total / count
-
-count = int(input("Enter the number of jars: "))
-
-total = 0
-below = 0
-inside = 0
-above = 0
-
-for i in range(count):
-    volume = int(input("Enter the jar volume: "))
-    result = classify(volume)
-    print(result)
-    total += volume
-
-    if result == "Below range":
-        below += 1
-    elif result == "In range":
-        inside += 1
-    else:
-        above += 1
-average = calculate_average(total, count)
-
-print(f"Total volume: {total} ml")
-print(f"Average volume: {average} ml")
-print(f"Below range: {below}")
-print(f"In range: {inside}")
-print(f"Above range: {above}")
+        print(f"First matching index: {first_index}")
+    print(f"Matching values: {matching_count}")
